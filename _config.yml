@@ -9,7 +9,9 @@
 title: Yottacho.GitHub.io
 email: 
 description: > # this means to ignore newlines until "baseurl:"
-  개인 코드 저장소
+  뭘 해도 시원찮아<br/>
+  이번 생은 글렀어<br/>
+  그래도 내가 산 흔적일랑 남겨둬야지
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://yottacho.github.io" # the base hostname & protocol for your site
 #twitter_username: jekyllrb
