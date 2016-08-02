@@ -29,7 +29,7 @@ tags: dev
         * C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin
         * C:\Program Files (x86)\Microsoft SDKs\Windows\v8.1A\bin\NETFX 4.5.1 Tools
         * C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6 Tools
-    - `TlbImp "파일명.DLL(OCX)"`으로 실행하면 "파일명`Lib`.dll"이 생성된다.
+    - `TlbImp "파일명.DLL(OCX)"`으로 실행하면 "파일명`Lib`.dll"이 생성된다. (생성되는 파일명은 다를 수 있음)
         * TlbImp의 옵션은 [`MSDN`](https://msdn.microsoft.com/ko-kr/library/tt0cf3sx(v=vs.110).aspx)을 참조한다.
         * TlbImp로 생성한 "파일명Lib.dll"을 `Ildasm`으로 열면 구조를 확인할 수 있다.
         * 생성된 파일을 RegAsm을 통해 닷넷 공유 라이브러리로 등록할 수 있다고 하는데 안 해봤다.
