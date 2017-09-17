@@ -19,3 +19,5 @@ github_username:  yottacho
 
 # Build settings
 markdown: kramdown
+
+theme: jekyll-theme-modernist
