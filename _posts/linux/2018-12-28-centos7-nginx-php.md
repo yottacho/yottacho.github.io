@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CentOS 7 + Nginx + php7"
-date:   2018-12-28 21:00:00 +0900
+date:   2018-12-28 21:01:00 +0900
 categories: linux
 tags: linux
 ---
