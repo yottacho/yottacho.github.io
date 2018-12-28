@@ -15,7 +15,7 @@ tags: linux
 
 [CentOS 배포 페이지](https://centos.org)에서 Minimal ISO를 다운로드해서 설치한다.
 
-1. SELinux 끄기
+* SELinux 끄기
     * SELinux를 잘 다룰 수 없으면 끄는게 낫다.
 
 `sudo vi /etc/selinux/config` 파일을 편집한다.
@@ -25,17 +25,15 @@ SELINUX=disabled
 
 저장 후 재부팅한다.
 
-
-2. 텔넷 설치하기
+* 텔넷 설치하기
     * 프로그램 테스트할 때 텔넷이 없으면 불편하다.
 
 `sudo yum install telnet`
 
-3. ifconfig 등 네트워크 유틸리티 설치하기
+* ifconfig 등 네트워크 유틸리티 설치하기
     * ip가 제대로 설정되어 있는지 확인
 
 `sudo yum install net-tools`
-
 
 #### 2. Nginx 설치하기
 
@@ -159,3 +157,5 @@ sudo systemctl enable nginx
 
 sudo systemctl reload nginx php–fpm
 ```
+
+끝
