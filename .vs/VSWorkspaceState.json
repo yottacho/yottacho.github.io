@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\_posts",
-    "\\_posts\\sql"
+    "\\_posts\\linux",
+    "\\_posts\\sql",
+    "\\_posts\\windows-dev"
   ],
-  "SelectedNode": "\\_posts\\sql\\2017-08-15-sql-tips.md",
+  "SelectedNode": "\\_posts\\linux\\2019-01-12_docker.md",
   "PreviewInSolutionExplorer": false
 }
