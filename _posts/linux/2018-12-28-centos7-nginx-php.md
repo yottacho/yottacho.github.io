@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CentOS 7 + Nginx + php7"
-date:   2018-12-28 21:11:00 +0900
+date:   2018-12-28 21:21:00 +0900
 categories: linux
 tags: linux
 ---
@@ -413,6 +413,12 @@ server {
 
     error_page  404              /404.html;
 
+    # REST API 구현용 /api/resource/path 형식의 주소를 /api/index.php/resource/path 로 변환하는 샘플
+    # 여기에 regex를 사용하면 안 됨
+    location /api/ {
+        rewrite  /api/(.*)$   /api/index.php/$1;
+    }
+
     # php-fpm 설정 (기본 포트 9000 을 사용)
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
     location ~ [^/]\.php(/|$) {
@@ -428,6 +434,7 @@ server {
         fastcgi_index  index.php;
     #   SCRIPT_FILENAME 부분은 요구 케이스별로 조정합니다
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    #   REST API 구현하면서 php 파일명 뒤에 추가한 리소스 경로를 $_SERVER['PATH_INFO']로 전달
         fastcgi_param  PATH_INFO        $fastcgi_path_info;
     #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
         include        fastcgi_params;
