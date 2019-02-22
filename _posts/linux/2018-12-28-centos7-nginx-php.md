@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "CentOS 7 + Nginx + php7"
-date:   2018-12-28 21:01:00 +0900
+date:   2018-12-28 21:11:00 +0900
 categories: linux
 tags: linux
 ---
@@ -399,7 +399,7 @@ server {
     listen       80;
     server_name  localhost;
 
-    # 홈 디렉터리 지정
+    # 홈 디렉터리 지정 (location 밖으로 꺼낸다)
     root   /usr/share/nginx/html;
     # 문서 찾는 순서 지정
     index  index.php index.html index.htm;
@@ -415,13 +415,20 @@ server {
 
     # php-fpm 설정 (기본 포트 9000 을 사용)
     # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-    location ~ \.php$ {
+    location ~ [^/]\.php(/|$) {
     #    root           html;
         try_files      $uri =404;
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+        fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+        if (!-f $document_root$fastcgi_script_name) {
+            return 404;
+        }
+
         fastcgi_pass   127.0.0.1:9000;
         fastcgi_index  index.php;
+    #   SCRIPT_FILENAME 부분은 요구 케이스별로 조정합니다
         fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  PATH_INFO        $fastcgi_path_info;
     #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
         include        fastcgi_params;
 
@@ -442,6 +449,7 @@ server {
  
    # 아래 설정은 PHP 성능 향상을 위한 옵션입니다. 추가해 주시면 좋답니다.
         sendfile                        on;
+        client_max_body_size            10M;
         tcp_nopush                      off;
         keepalive_requests              0;
     }
@@ -482,7 +490,7 @@ server {
 
 3. `/etc/php.ini`를 편집한다.
     ```
-    cgi.fix_pathinfo = 0 ; 주석해제
+    ;cgi.fix_pathinfo = 0 ; 기본값은 1이며 php-fpm에서 못 찾을 경우 0으로 셋팅
     allow_url_fopen = Off
     expose_php = Off
     display_errors = Off
@@ -495,6 +503,10 @@ server {
     group = nginx
     listen.owner = nobody  # 주석해제
     ```
+
+5. php 세션 디렉터리의 owner/group 을 변경한다.  
+   `find /var -group apache` 여기서 보이는 디렉터리에 가서 `chown nginx:nginx 디렉터리명`으로 오너/그룹을 변경한다.  
+   보통 `/var/lib/php/session`에 있으나 간혹 `/var/opt/remi/php73/lib/php`에 위치하기도 하니 확인하여 변경한다.
 
 
 ### 4. 방화벽 해제 및 서비스 등록
