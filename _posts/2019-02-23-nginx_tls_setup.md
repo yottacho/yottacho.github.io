@@ -2,7 +2,6 @@
 layout: post
 title:  "Nginx + TLS/SSL/HTTPS HTTP/2"
 date:   2019-02-23 12:01:00 +0900
-categories: 
 tags: nginx
 ---
 
