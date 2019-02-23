@@ -5,41 +5,41 @@ date:   2019-02-23 12:01:00 +0900
 tags: nginx
 ---
 
-# ¿£Áø¿¢½º(Nginx)·Î º¸¾È¼­¹ö ±¸ÃàÇÏ±â
+# ì—”ì§„ì—‘ìŠ¤(Nginx)ë¡œ ë³´ì•ˆì„œë²„ êµ¬ì¶•í•˜ê¸°
 
-> Nginx + TLS/SSL/HTTPS ¹× HTTP/2 ±¸ÃàÇÏ±â
+> Nginx + TLS/SSL/HTTPS ë° HTTP/2 êµ¬ì¶•í•˜ê¸°
 
-### 1. nginx ÃÖ½Å ÆĞÅ°Áö ¼³Ä¡
+### 1. nginx ìµœì‹  íŒ¨í‚¤ì§€ ì„¤ì¹˜
 
-RHELÀÌ³ª CentOSÀÇ ¿£Áø¿¢½º ÆĞÅ°Áö´Â http/2 µîÀ» Áö¿øÇÏÁö ¾Ê´Â ±¸ ¹öÀüÀÌ¹Ç·Î, °ø½Ä »çÀÌÆ®¿¡¼­ ÃÖ½Å ¹öÀüÀ» ¼³Ä¡ÇÑ´Ù.
+RHELì´ë‚˜ CentOSì˜ ì—”ì§„ì—‘ìŠ¤ íŒ¨í‚¤ì§€ëŠ” http/2 ë“±ì„ ì§€ì›í•˜ì§€ ì•ŠëŠ” êµ¬ ë²„ì „ì´ë¯€ë¡œ, ê³µì‹ ì‚¬ì´íŠ¸ì—ì„œ ìµœì‹  ë²„ì „ì„ ì„¤ì¹˜í•œë‹¤.
 
-> ´Ù¸¥ ¹èÆ÷ÆÇÀº [°ø½Ä È¨ÆäÀÌÁöÀÇ ¼³Ä¡ ¹æ¹ı](https://nginx.org/en/linux_packages.html)À» Âü°íÇÑ´Ù.
+> ë‹¤ë¥¸ ë°°í¬íŒì€ [ê³µì‹ í™ˆí˜ì´ì§€ì˜ ì„¤ì¹˜ ë°©ë²•](https://nginx.org/en/linux_packages.html)ì„ ì°¸ê³ í•œë‹¤.
 
-[RHEL/CentOS¿ë yum ÆĞÅ°Áö](https://nginx.org/packages/centos/)
+[RHEL/CentOSìš© yum íŒ¨í‚¤ì§€](https://nginx.org/packages/centos/)
 
 ```sh
 # curl -O https://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 # yum localinstall nginx-release-centos-7-0.el7.ngx.noarch.rpm
 # yum info nginx
-(¹öÀü È®ÀÎ µî)
+(ë²„ì „ í™•ì¸ ë“±)
 # yum install nginx
 ```
 
-### 2. ¼­¹ö ÀÎÁõ¼­ ÁØºñ
+### 2. ì„œë²„ ì¸ì¦ì„œ ì¤€ë¹„
 
-¼­¹ö ÀÎÁõ¼­¸¦ ÁØºñÇÑ´Ù. crt ÆÄÀÏ°ú key ÆÄÀÏ ¹× CAÀÇ Áß°£ ÀÎÁõ¼­¸¦ ÁØºñÇÑ´Ù.
+ì„œë²„ ì¸ì¦ì„œë¥¼ ì¤€ë¹„í•œë‹¤. crt íŒŒì¼ê³¼ key íŒŒì¼ ë° CAì˜ ì¤‘ê°„ ì¸ì¦ì„œë¥¼ ì¤€ë¹„í•œë‹¤.
 
-DHE (Ephemeral Diffie-Hellman) Å°¸¦ »ı¼ºÇÑ´Ù. ¹Ì ÁöÁ¤½Ã ±âº»°ªÀÌ 1024ºñÆ®·Î º¸¾ÈÀÌ ³·À¸¹Ç·Î 2048ºñÆ® ¶Ç´Â 4096ºñÆ®·Î ¼³Á¤ÇÑ´Ù.  
-´Ü, [RFC 7919](https://tools.ietf.org/html/rfc7919)(Negotiated Finite Field Diffie-Hellman Ephemeral Parameters for Transport Layer Security (TLS))¿¡ µû¶ó Á÷Á¢ »ı¼ºÇÏ´Â °Í º¸´Ù´Â »çÀü »ı¼ºµÈ °ÍÀ» »ç¿ëÇÒ °ÍÀÌ ±ÇÀåµÈ´Ù.
+DHE (Ephemeral Diffie-Hellman) í‚¤ë¥¼ ìƒì„±í•œë‹¤. ë¯¸ ì§€ì •ì‹œ ê¸°ë³¸ê°’ì´ 1024ë¹„íŠ¸ë¡œ ë³´ì•ˆì´ ë‚®ìœ¼ë¯€ë¡œ 2048ë¹„íŠ¸ ë˜ëŠ” 4096ë¹„íŠ¸ë¡œ ì„¤ì •í•œë‹¤.  
+ë‹¨, [RFC 7919](https://tools.ietf.org/html/rfc7919)(Negotiated Finite Field Diffie-Hellman Ephemeral Parameters for Transport Layer Security (TLS))ì— ë”°ë¼ ì§ì ‘ ìƒì„±í•˜ëŠ” ê²ƒ ë³´ë‹¤ëŠ” ì‚¬ì „ ìƒì„±ëœ ê²ƒì„ ì‚¬ìš©í•  ê²ƒì´ ê¶Œì¥ëœë‹¤.
 
 ```sh
 # openssl dhparam -out /etc/nginx/dhparam.pem 2048
-(½Ã°£ÀÌ °É¸²)
+(ì‹œê°„ì´ ê±¸ë¦¼)
 ```
 
-### 3. ¼³Á¤ ±¸¼º
+### 3. ì„¤ì • êµ¬ì„±
 
-rpm À¸·Î ¼³Ä¡ÇÏ¸é `/etc/nginx` ¿¡ ¼³Á¤ ÆÄÀÏÀÌ À§Ä¡ÇÑ´Ù. `/etc/nginx/conf.d/default.conf`¸¦ ¼öÁ¤ÇÑ´Ù.
+rpm ìœ¼ë¡œ ì„¤ì¹˜í•˜ë©´ `/etc/nginx` ì— ì„¤ì • íŒŒì¼ì´ ìœ„ì¹˜í•œë‹¤. `/etc/nginx/conf.d/default.conf`ë¥¼ ìˆ˜ì •í•œë‹¤.
 
 ```nginx
 server {
@@ -47,12 +47,12 @@ server {
     listen [::]:80 default_server;
     server_name  _;
 
-    # ¸ğµç Á¢¼ÓÀ» https·Î ¸®´ÙÀÌ·º¼ÇÇÑ´Ù.
+    # ëª¨ë“  ì ‘ì†ì„ httpsë¡œ ë¦¬ë‹¤ì´ë ‰ì…˜í•œë‹¤.
     return 301 https://$host$request_uri;
     # return 301 https://$server_name$request_uri;
 }
 
-# ¾Æ·¡ SSL ¼³Á¤Àº ´Ù¸¥ ÆÄÀÏ·Î ºĞ¸®ÇØµµ µÇ°í ÇÑ ÆÄÀÏ¿¡ ¸ğµÎ ¼³Á¤ÇØµµ ±¦Âú´Ù.
+# ì•„ë˜ SSL ì„¤ì •ì€ ë‹¤ë¥¸ íŒŒì¼ë¡œ ë¶„ë¦¬í•´ë„ ë˜ê³  í•œ íŒŒì¼ì— ëª¨ë‘ ì„¤ì •í•´ë„ ê´œì°®ë‹¤.
 server {
     listen      443 ssl http2 default_server;
     listen [::]:443 ssl http2 default_server;
@@ -67,11 +67,11 @@ server {
     #location = /robots.txt  { access_log off; log_not_found off; }
 
     ssl                 on;
-    # crt ÆÄÀÏÀº chain ÀÎÁõ¼­¸¦ »ç¿ëÇÒ ¼ö ÀÖ´Ù.
-    # cat "È£½ºÆ® crt" "ca crt" >> "Ã¼ÀÎcrt" ·Î È£½ºÆ® crt ÆÄÀÏ µÚ¿¡ »óÀ§ ÀÎÁõ¼­ crt¸¦ ºÙÀÎ´Ù.
+    # crt íŒŒì¼ì€ chain ì¸ì¦ì„œë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆë‹¤.
+    # cat "í˜¸ìŠ¤íŠ¸ crt" "ca crt" >> "ì²´ì¸crt" ë¡œ í˜¸ìŠ¤íŠ¸ crt íŒŒì¼ ë’¤ì— ìƒìœ„ ì¸ì¦ì„œ crtë¥¼ ë¶™ì¸ë‹¤.
     ssl_certificate     /etc/nginx/host_chained.crt;
     ssl_certificate_key /etc/nginx/host.key;
-    # dhparam Àº ÃßÈÄ ´ëÃ¼µÉ ¼ö ÀÖÀ½
+    # dhparam ì€ ì¶”í›„ ëŒ€ì²´ë  ìˆ˜ ìˆìŒ
     ssl_dhparam         /etc/nginx/dhparam.pem;
 
     ssl_prefer_server_ciphers   on;
@@ -83,29 +83,29 @@ server {
     #ssl_protocols TLSv1.2;
     #ssl_ciphers 'ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256';
 
-    # ¼º´É Çâ»ó
+    # ì„±ëŠ¥ í–¥ìƒ
     ssl_session_timeout 1d;
     ssl_session_cache shared:SSL:50m;
     ssl_session_tickets off;
 
-    # ÇÊ¿äÇÏ¸é Àû¿ë
+    # í•„ìš”í•˜ë©´ ì ìš©
     #charset utf-8;
 
-    # https Á¢¼Ó¸¸ Çã¿ëÇÒ °æ¿ì (15768000 = 6 Months)
+    # https ì ‘ì†ë§Œ í—ˆìš©í•  ê²½ìš° (15768000 = 6 Months)
     add_header Strict-Transport-Security "max-age=15768000" always;
-    # ¼­ºêµµ¸ŞÀÎ±îÁö https Á¢¼Ó¸¸ Çã¿ëÇÒ °æ¿ì
+    # ì„œë¸Œë„ë©”ì¸ê¹Œì§€ https ì ‘ì†ë§Œ í—ˆìš©í•  ê²½ìš°
     # add_header Strict-Transport-Security "max-age=15768000; includeSubDomains" always;
 
     # OCSP Stapling ---
     # fetch OCSP records from URL in ssl_certificate and cache them
-    # Ã¼ÀÎÀÎÁõ¼­ ´ë½Å CAÀÇ Áß°£ÀÎÁõ¼­¸¦ º°µµ·Î ÁöÁ¤ÇÏ±â
+    # ì²´ì¸ì¸ì¦ì„œ ëŒ€ì‹  CAì˜ ì¤‘ê°„ì¸ì¦ì„œë¥¼ ë³„ë„ë¡œ ì§€ì •í•˜ê¸°
     #ssl_stapling on;
     #ssl_stapling_verify on;
 
     # verify chain of trust of OCSP response using Root CA and Intermediate certs
-    # Ã¼ÀÎ ÀÎÁõ¼­ ´ë½Å CAÀÇ ÀÎÁõ¼­¸¦ ¸ğµÎ ÀÌ¾îºÙÀÎ ÀÎÁõ¼­¸¦ º°µµ·Î ÁöÁ¤
+    # ì²´ì¸ ì¸ì¦ì„œ ëŒ€ì‹  CAì˜ ì¸ì¦ì„œë¥¼ ëª¨ë‘ ì´ì–´ë¶™ì¸ ì¸ì¦ì„œë¥¼ ë³„ë„ë¡œ ì§€ì •
     #ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates;
-    # ÀÎÁõ¼­ ¹ß±Ş¾÷Ã¼¿Í Åë½ÅÇÏ¿© ÀÎÁõ¼­ °ËÁõÇÏ±â À§ÇÔ
+    # ì¸ì¦ì„œ ë°œê¸‰ì—…ì²´ì™€ í†µì‹ í•˜ì—¬ ì¸ì¦ì„œ ê²€ì¦í•˜ê¸° ìœ„í•¨
     #resolver   8.8.8.8   8.8.4.4;
 
     location ~ /\.ht {
@@ -116,9 +116,9 @@ server {
 }
 ```
 
-### 4. À¥¼­¹ö Àç½ÃÀÛ
+### 4. ì›¹ì„œë²„ ì¬ì‹œì‘
 
-`nginx -t` ¸í·ÉÀ¸·Î ¼³Á¤ÆÄÀÏ ¿À·ù¸¦ È®ÀÎÇÑ ÈÄ ¿£Áø¿¢½º ¼­¹ö¸¦ Àç½ÃÀÛÇÑ´Ù.
+`nginx -t` ëª…ë ¹ìœ¼ë¡œ ì„¤ì •íŒŒì¼ ì˜¤ë¥˜ë¥¼ í™•ì¸í•œ í›„ ì—”ì§„ì—‘ìŠ¤ ì„œë²„ë¥¼ ì¬ì‹œì‘í•œë‹¤.
 
-°ø°³µÈ ¼­¹ö¶ó¸é [SSL Server Test](https://www.ssllabs.com/ssltest/) »çÀÌÆ®¿¡¼­ Å×½ºÆ®ÇÒ ¼ö ÀÖÀ¸¸ç, Aµî±Ş ¶Ç´Â Bµî±ŞÀÌ¸é Àß ¼³Ä¡µÈ °ÍÀÌ´Ù.
+ê³µê°œëœ ì„œë²„ë¼ë©´ [SSL Server Test](https://www.ssllabs.com/ssltest/) ì‚¬ì´íŠ¸ì—ì„œ í…ŒìŠ¤íŠ¸í•  ìˆ˜ ìˆìœ¼ë©°, Aë“±ê¸‰ ë˜ëŠ” Bë“±ê¸‰ì´ë©´ ì˜ ì„¤ì¹˜ëœ ê²ƒì´ë‹¤.
 
