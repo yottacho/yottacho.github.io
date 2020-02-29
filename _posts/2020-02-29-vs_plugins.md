@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "비주얼스튜디오 플러그인"
-date:   2020-02-29 15:10:00 +0900
+date:   2020-02-29 15:20:00 +0900
 categories: windows-dev
 tags: dev
 ---
@@ -11,7 +11,9 @@ tags: dev
 자동으로 설치되는 것은 제외
 
 * CodeMaid by Steve Cardwallader
+* Color Coder by Hamid Mosalla
 * Developer Analytics Tools by Microsoft
+* File Icons by Mads Kristensen
 * Indent Guides by Steve Dower
 * JSON Viewer by Mykola Tatasyuk
 * Markdown Editor by Mads Kristensen
@@ -21,5 +23,4 @@ tags: dev
 
 그외
 
-* Color Coder by Hamid Mosalla
 * SQLite/SQL Server Compact Toolbox by ErikEJ
