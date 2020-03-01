@@ -20,6 +20,7 @@ tags: dev
 * Microsoft Code Analysis 2019 by Microsoft
 * Pronama-chan IDE by jz5
 * XAML Styler by Xavalon
+* Microsoft Visual Studio Installer Projects by Microsoft
 
 그외
 
