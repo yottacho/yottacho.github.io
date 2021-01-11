@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "C# OAuth 1.0 Authorization 헤더값 생성"
-date:   2021-01-09 16:50:00 +0900
+date:   2021-01-11 11:00:00 +0900
 categories: windows-dev
 tags: dev
 ---
@@ -85,6 +85,35 @@ namespace YottaCho
     }
 }
 
+```
+
+예상대로 제대로 동작하지는 않더라.
+
+### 4. DotNetOpenAuth 활용
+
+[https://oauth.net/1/](https://oauth.net/1/) 라이브러리 중 [DotNetOpenAuth](http://dotnetopenauth.net/) 를 활용하는 초간단 예제.
+
+```
+(VS에서 보기-다른창-패키지 관리자 콘솔을 오픈한다.)
+PM> Install-Package DotNetOpenAuth.OAuth.Consumer
+```
+
+```csharp
+OAuth1HmacSha1HttpMessageHandler oauth1;
+
+oauth1 = new OAuth1HmacSha1HttpMessageHandler()
+{
+    ConsumerKey = "ApiKey",
+    ConsumerSecret = "ApiSecret",
+    AccessToken = "OAuthToken",
+    AccessTokenSecret = "OAuthSecret"
+};
+
+HttpRequestMessage http = new HttpRequestMessage(HttpMethod.Get, "https://host/path");
+oauth1.ApplyAuthorization(http);
+
+string authorizationHeader = $"{http.Headers.Authorization.Scheme} {http.Headers.Authorization.Parameter}"; ;
+Debug.WriteLine($"Auth {authorizationHeader}");
 ```
 
 끝.
