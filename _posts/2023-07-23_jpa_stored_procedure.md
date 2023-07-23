@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "JPA로 저장 프로시저(Stored procedure) 호출하기"
-date:   2023-07-23 22:00:00 +0900
+date:   2023-07-23 22:30:00 +0900
 categories: java
 tags: dev, spring-boot, jpa
 ---
@@ -28,7 +28,7 @@ tags: dev, spring-boot, jpa
 
 이 어려움을 개선하기 위해 어노테이션과 DTO 클래스를 통해서 프로시저를 호출하는 방법을 구현해 보았다.
 
-아래 코드는 모두 Public domain으로, 자유롭게 가져다 써도 Ok.
+아래 코드는 모두 Public domain으로, 자유롭게 가져다 써도 Ok. Spring boot 버전은 3.0
 
 ### 2. 어노테이션 정의
 
