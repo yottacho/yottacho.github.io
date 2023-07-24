@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "JPA로 저장 프로시저(Stored procedure) 호출하기"
-date:   2023-07-23 22:30:00 +0900
+date:   2023-07-23 22:33:00 +0900
 categories: java
 tags: dev, spring-boot, jpa
 ---
